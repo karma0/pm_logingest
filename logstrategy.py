@@ -1,5 +1,5 @@
 """
-Simple echo strategy to output an "ECHO"
+Simple log strategy to output messages.
 """
 
 
@@ -9,12 +9,12 @@ from strategy import IStrategy
 
 
 class Logger(IStrategy):
-    """Echo Strategy implementation"""
+    """Log Strategy implementation"""
     log = create_logger('logingest')
 
     def bind(self, context):
         """
-        Bind the strategy to the middleware pipeline,
+        Bind the context to the middleware pipeline,
         returning the context
         """
         self.log.info(context)

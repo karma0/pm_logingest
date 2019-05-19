@@ -5,13 +5,16 @@ Python logging facilities.
 import os
 import logging
 
-def create_logger(name):
-    """Generic logger for application.  Configure logging from the returned
+
+def create_logger(name=__name__):
+    """
+    Generic logger for application.  Configure logging from the returned
     resource.
     """
-    logger = logging.getLogger(__name__)
-    logger.setLevel(os.environ.get('LOGLEVEL', logging.INFO))
-    return logger
+    log = logging.getLogger(name)
+    level = os.environ.get('LOGLEVEL', 'INFO')
+    log.setLevel(getattr(logging, level, logging.INFO))
+    return log
 
-logger = create_logger(__name__)
+logger = create_logger()
 """Global logger for application to use."""

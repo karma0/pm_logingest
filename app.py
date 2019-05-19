@@ -1,3 +1,7 @@
+"""
+Main Application.  Inherit and override, or build similarly for other apps.
+"""
+
 from flask import Flask
 from flask_restful import Resource, Api
 
@@ -11,6 +15,12 @@ api = Api(app)
 
 
 class LogIngest(Resource, StrategyMixin):
+    """
+    A route with a set of methods for ingesting log information.  Use GET or
+    PUT, passing the message parameter as a string of the message to be logged
+    to the below middleware_strategies.
+    """
+
     middleware_strategies = (
         Logger(),
         Firehose(),

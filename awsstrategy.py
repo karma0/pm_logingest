@@ -28,8 +28,6 @@ class Firehose(IStrategy):
 
         self.firehose = boto3.client('firehose', region_name=region)
 
-        self.status = "OK"
-
     def bind(self, context):
         """
         Bind the strategy to the middleware pipeline,
@@ -40,6 +38,9 @@ class Firehose(IStrategy):
         return context
 
     def _parametize(self, data):
+        """
+        Parameterizes the context's data in a way that's familiar to Firehose.
+        """
         return {
             "DeliveryStreamName": self.name,
             "Record": {
